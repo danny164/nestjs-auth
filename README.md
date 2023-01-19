@@ -1,4 +1,4 @@
-# Mycro.Page Application
+# NestJs Auth Application
 
 ### Development
 

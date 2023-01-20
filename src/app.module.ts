@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AppConfig } from './config';
 import { CoffeesModule } from './modules/coffees/coffees.module';
 import { UsersModule } from './modules/users/users.module';
+import { IamModule } from './modules/iam/iam.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from './modules/users/users.module';
     }),
     CoffeesModule,
     UsersModule,
+    IamModule,
   ],
   controllers: [AppController],
   providers: [AppService],

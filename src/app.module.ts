@@ -1,11 +1,11 @@
-import { CoffeesModule } from '@modules/coffees/coffees.module';
-import { UsersModule } from '@modules/users/users.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppConfig } from './config';
+import { CoffeesModule } from './modules/coffees/coffees.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [

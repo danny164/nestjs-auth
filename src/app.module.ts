@@ -7,7 +7,6 @@ import { AppConfig } from './config';
 import { CoffeesModule } from './modules/coffees/coffees.module';
 import { UsersModule } from './modules/users/users.module';
 import { IamModule } from './modules/iam/iam.module';
-import { AuthenticationController } from './iam/authentication/authentication.controller';
 
 @Module({
     imports: [
@@ -30,7 +29,7 @@ import { AuthenticationController } from './iam/authentication/authentication.co
         UsersModule,
         IamModule
     ],
-    controllers: [AppController, AuthenticationController],
+    controllers: [AppController],
     providers: [AppService]
 })
 export class AppModule {}

@@ -2,9 +2,12 @@ import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/commo
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthenticationService } from './authentication.service';
+import { Auth } from './decorators/auth.decorator';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
+import { AuthType } from './enums/auth-type.enum';
 
+@Auth(AuthType.None)
 @Controller('authentication')
 @ApiTags('authentication')
 export class AuthenticationController {
@@ -19,7 +22,8 @@ export class AuthenticationController {
     @Post('sign-in')
     async signIn(@Res({ passthrough: true }) response: Response, @Body() signInDto: SignInDto) {
         const accessToken = await this.authService.signIn(signInDto);
-        response.cookie('accessToken', accessToken, {
+
+        response.cookie('authCookie', accessToken, {
             secure: true,
             httpOnly: true,
             sameSite: true

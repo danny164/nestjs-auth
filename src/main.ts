@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 
 import helmet from 'helmet';
 import { AppModule } from './app.module';
@@ -10,6 +11,7 @@ async function bootstrap() {
 
     app.enableCors({ origin: '*' });
     app.use(helmet());
+    app.use(cookieParser());
 
     app.useGlobalPipes(
         new ValidationPipe({
@@ -23,8 +25,8 @@ async function bootstrap() {
     );
 
     const options = new DocumentBuilder()
-        .setTitle('I Luv Coffee')
-        .setDescription('Coffee Application')
+        .setTitle('NestJS Auth')
+        .setDescription('NestJs Auth')
         .setVersion('1.0.0')
         .addBearerAuth()
         .addApiKey({ type: 'apiKey', name: 'X-API-KEY', in: 'header' }, 'X-API-KEY')

@@ -15,7 +15,7 @@ export class AuthenticationService {
         @InjectRepository(User) private readonly usersRepository: Repository<User>,
         private readonly hashingService: HashingService,
         private readonly jwtService: JwtService,
-        @Inject(jwtConfig.KEY) // 👈
+        @Inject(jwtConfig.KEY)
         private readonly jwtConfiguration: ConfigType<typeof jwtConfig>
     ) {}
 
@@ -28,9 +28,11 @@ export class AuthenticationService {
             await this.usersRepository.save(user);
         } catch (err) {
             const pgUniqueViolationErrorCode = '23505';
+
             if (err.code === pgUniqueViolationErrorCode) {
                 throw new ConflictException();
             }
+
             throw err;
         }
     }
@@ -51,7 +53,6 @@ export class AuthenticationService {
         }
 
         const accessToken = await this.jwtService.signAsync(
-            // 👈
             {
                 sub: user.id,
                 email: user.email

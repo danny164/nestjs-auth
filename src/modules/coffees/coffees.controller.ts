@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { ActiveUser } from '../iam/decorators/active-user.decorator';
+import { User } from '../users/entities/user.entity';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -15,7 +17,8 @@ export class CoffeesController {
     }
 
     @Get()
-    findAll() {
+    findAll(@ActiveUser() user: User) {
+        console.info(user);
         return this.coffeesService.findAll();
     }
 
